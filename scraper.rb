@@ -1,9 +1,8 @@
 #!/bin/env ruby
 # encoding: utf-8
 
-require 'scraperwiki'
 require 'wikidata/fetcher'
-require 'rest-client'
+require 'pry'
 
 @pages = [
   'Catégorie:Conseiller national suisse de la 49e législature',
@@ -17,11 +16,7 @@ require 'rest-client'
   'Catégorie:Conseiller national suisse de la 41e législature',
 ]
 
-@pages.map { |c| WikiData::Category.new(c, 'fr').wikidata_ids }.flatten.uniq.each do |id|
-  data = WikiData::Fetcher.new(id: id).data('fr', 'de') or next
-  # puts "%s %s" % [data[:id], data[:name]]
-  ScraperWiki.save_sqlite([:id], data)
-end
-
-warn RestClient.post ENV['MORPH_REBUILDER_URL'], {} if ENV['MORPH_REBUILDER_URL']
+names = @pages.map { |c| WikiData::Category.new(c, 'fr').member_titles }.flatten.uniq
+EveryPolitician::Wikidata.scrape_wikidata(names: { fr: names })
+warn EveryPolitician::Wikidata.notify_rebuilder
 
