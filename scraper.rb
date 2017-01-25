@@ -4,6 +4,7 @@
 require 'wikidata/fetcher'
 
 @pages = [
+  'Catégorie:Conseiller national suisse de la 50e législature',
   'Catégorie:Conseiller national suisse de la 49e législature',
   'Catégorie:Conseiller national suisse de la 48e législature',
   'Catégorie:Conseiller national suisse de la 47e législature',
