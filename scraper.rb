@@ -49,5 +49,7 @@ de_names[45] = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: '//table[.//th[.="Stimmen"]]//td[position() = last()]//a[not(@class="new")]/@title',
 )
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { fr: fr_names, de: de_names.values.flatten.uniq })
+ids = %w(Q29044353 Q28846129)
+
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { fr: fr_names, de: de_names.values.flatten.uniq })
 
