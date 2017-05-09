@@ -49,7 +49,9 @@ de_names[45] = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: '//table[.//th[.="Stimmen"]]//td[position() = last()]//a[not(@class="new")]/@title',
 )
 
-ids = %w(Q29044353 Q28846129)
+# has Property: "Swiss Parliament ID"
+sparq = 'SELECT ?item WHERE { ?item wdt:P1307 ?id . }'
+ids = EveryPolitician::Wikidata.sparql(sparq)
 
 EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { fr: fr_names, de: de_names.values.flatten.uniq })
 
