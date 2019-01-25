@@ -22,35 +22,8 @@ require 'wikidata/fetcher'
 
 fr_names = @pages.map { |c| WikiData::Category.new(c, 'fr').member_titles }.flatten.uniq
 
-
-de_names = {}
-de_names[50] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Schweizer_Nationalrats_in_der_50._Legislaturperiode',
-  xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
-)
-
-de_names[49] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Schweizer_Nationalrats_in_der_49._Legislaturperiode',
-  xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
-)
-
-de_names[48] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/48._Legislaturperiode_der_Schweizer_Bundesversammlung',
-  xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
-)
-
-de_names[47] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/47._Legislaturperiode_der_Schweizer_Bundesversammlung',
-  xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
-)
-
-de_names[45] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/Schweizer_Parlamentswahlen_1995/Resultate_Nationalratswahlen',
-  xpath: '//table[.//th[contains(.,"Stimmen")]]//td[position() = last()]//a[not(@class="new")]/@title',
-)
-
 # has Property: "Swiss Parliament ID"
 sparq = 'SELECT ?item WHERE { ?item wdt:P1307 ?id . }'
 ids = EveryPolitician::Wikidata.sparql(sparq)
 
-EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { fr: fr_names, de: de_names.values.flatten.uniq }, batch_size: 250)
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { fr: fr_names }, batch_size: 250)
