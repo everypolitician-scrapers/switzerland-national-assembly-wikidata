@@ -25,12 +25,12 @@ fr_names = @pages.map { |c| WikiData::Category.new(c, 'fr').member_titles }.flat
 
 de_names = {}
 de_names[50] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/50._Legislaturperiode_der_Schweizer_Bundesversammlung',
+  url: 'https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Schweizer_Nationalrats_in_der_50._Legislaturperiode',
   xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
 )
 
 de_names[49] = EveryPolitician::Wikidata.wikipedia_xpath(
-  url: 'https://de.wikipedia.org/wiki/49._Legislaturperiode_der_Schweizer_Bundesversammlung',
+  url: 'https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Schweizer_Nationalrats_in_der_49._Legislaturperiode',
   xpath: '//table[.//th[contains(.,"Name")]]//td[1]//a[not(@class="new")]/@title',
 )
 
