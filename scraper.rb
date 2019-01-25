@@ -20,10 +20,10 @@ require 'wikidata/fetcher'
   'Catégorie:Conseiller national suisse de la 37e législature',
 ]
 
-fr_names = @pages.map { |c| WikiData::Category.new(c, 'fr').member_titles }.flatten.uniq
+frwiki = @pages.map { |c| WikiData::Category.new(c, 'fr').wikidata_ids }.flatten.uniq
 
 # has Property: "Swiss Parliament ID"
 sparq = 'SELECT ?item WHERE { ?item wdt:P1307 ?id . }'
 ids = EveryPolitician::Wikidata.sparql(sparq)
 
-EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { fr: fr_names }, batch_size: 250)
+EveryPolitician::Wikidata.scrape_wikidata(ids: frwiki | ids, batch_size: 250)
