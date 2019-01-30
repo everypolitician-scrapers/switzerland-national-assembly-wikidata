@@ -7,4 +7,4 @@ require 'wikidata/fetcher'
 sparq = 'SELECT ?item WHERE { ?item wdt:P1307 [] }'
 ids = EveryPolitician::Wikidata.sparql(sparq)
 
-EveryPolitician::Wikidata.scrape_wikidata(ids: ids, batch_size: 250)
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, batch_size: 100)
